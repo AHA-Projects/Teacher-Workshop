@@ -1,3 +1,14 @@
+
+// Acknowledgments
+
+// Creator: Anany Sharma at the University of Florida working under NSF grant. 2405373
+
+// This material is based upon work supported by the National Science Foundation under Grant No. 2405373. 
+// Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.
+
+
+
+
 // Importing Wire.h, it helps in communicating with I2C devices
 // What is I2C?
 // I@C is a communication protocol that allows a microcontroller to communicate with multiple peripherals, such as sensors or displays.
