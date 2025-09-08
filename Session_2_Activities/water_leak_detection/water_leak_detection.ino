@@ -174,10 +174,17 @@ void loop()
     }
 
     String mappedLabel;
+    uint16_t textColor;
+
+    // If the model predicts the color is "Red,"
+    // we assume this means the sensor has detected our water-sensitive red strip.
+    // Therefore, we "map" the color "Red" to the message "Water Leak Detected."    
     if (newLabel == "Red") {
-        mappedLabel = "Water Leak Detected";
+        mappedLabel = "Water Leaking";
+        textColor = ST77XX_RED;
     } else {
         mappedLabel = "No Water Leak";
+        textColor = ST77XX_GREEN;
     }
 
     // Display the stable label on the OLED screen.
@@ -188,7 +195,7 @@ void loop()
     // Set the cursor position, text size, and color for the main label.
     display.setCursor(0, 0);       
     display.setTextSize(4);        
-    display.setTextColor(ST77XX_WHITE); 
+    display.setTextColor(textColor); 
     // Print the most probable label.
     display.println(label);       
 
