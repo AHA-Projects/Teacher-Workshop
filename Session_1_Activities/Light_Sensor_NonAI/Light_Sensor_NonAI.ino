@@ -16,9 +16,28 @@
 
 // Importing Sensor Libraries - Light Sensor
 #include "Adafruit_APDS9960.h"
-
+// --- Libraries for the TFT Display ---
+#include <Adafruit_GFX.h>     // Core graphics library - helps draw shapes and text
+#include <Adafruit_ST7789.h>  // Library for our ST7789 TFT screen
+// These lines tell the Arduino which pins are connected to the screen.
+// IMPORTANT: These pin numbers might be different for your specific Arduino board or wiring.
+// These are common for ESP32 boards.
+#define TFT_CS    33  // TFT Chip Select pin
+#define TFT_DC    25  // TFT Data/Command pin
+#define TFT_RST   26  // TFT Reset pin (can be -1 if not used and tied to Arduino RST)
 // Instantiating our sensor object
 Adafruit_APDS9960 apds;
+
+Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST); // Creates the screen object
+
+
+// --- Color Definitions for TFT Display ---
+// Easy names for colors the screen understands.
+#define BLACK     0x0000  // No color
+#define WHITE     0xFFFF  // All colors
+#define RED       0xF800  // Red color for errors or temperature
+#define ORANGE    0xFD20  // An orange color, good for temperature
+#define CYAN      0x07FF  // A cyan (light blue) color, good for humidity
 
 // Initializing all the sensor outputs variables
 uint16_t ambient_light = 0;
@@ -46,8 +65,25 @@ void setup() {
 
   // Turn on the color sensing mode
   apds.enableColor(true);
+
+  tft.init(170, 320);     // Tell the screen to get ready.
+  Serial.println(F("TFT Initialized"));
+  tft.setRotation(3);     // Rotate screen (often 3 for landscape: 320 wide, 170 tall).
+  tft.fillScreen(BLACK);  // Make the whole screen black.
   
-  // Wait for the sensor to get ready
+  // These labels will stay on the screen.
+    tft.setTextSize(3);             // Set a medium-large text size for labels.
+    tft.setTextColor(WHITE);        // Use white color for labels.
+    
+    // Label for Red Channel
+    tft.setCursor(10, 20);         
+    tft.print(F("RED:"));
+    // Label for Blue Channel
+    tft.setCursor(10, 70);          
+    tft.print(F("GREEN:"));
+    // Label for Blue Channel
+    tft.setCursor(10, 120);         
+    tft.print(F("BLUE:"));
   delay(500);
 }
 
@@ -79,9 +115,33 @@ void loop() {
   Serial.print(" Blue: ");
   float B = (255.*blue_light/ambientLight);
   Serial.println(B);
+
+
+  // --- Display Red Value on TFT ---
+  // Clear the area where the old value was
+  tft.fillRect(120, 10, 190, 40, BLACK); 
+  tft.setTextSize(4);                    // Use a large text size for the value
+  tft.setTextColor(RED);                 // Red color for the red value
+  tft.setCursor(120, 15);                // Set cursor position (right of "RED:")
+  tft.print(R);                  // Print the raw red value
+
+  // --- Display Green Value on TFT ---
+  tft.fillRect(140, 60, 170, 40, BLACK);
+  tft.setTextSize(4);
+  tft.setTextColor(ST77XX_GREEN);               // Green color for the green value
+  tft.setCursor(140, 65);                // Set cursor position (right of "GREEN:")
+  tft.print(G);                // Print the raw green value
+
+  // --- Display Blue Value on TFT ---
+  tft.fillRect(120, 110, 190, 40, BLACK);
+  tft.setTextSize(4);
+  tft.setTextColor(CYAN);                // Blue color for the blue value
+  tft.setCursor(120, 115);               // Set cursor position (right of "BLUE:")
+  tft.print(B);                 // Print the raw blue value
+  
   
   // Wait 1 second before next reading
-  delay(100);
+  delay(1000);
   
 
 }
