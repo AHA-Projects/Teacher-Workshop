@@ -73,16 +73,18 @@ void setup() {
   
   // These labels will stay on the screen.
     tft.setTextSize(3);             // Set a medium-large text size for labels.
-    tft.setTextColor(WHITE);        // Use white color for labels.
     
     // Label for Red Channel
-    tft.setCursor(10, 20);         
+    tft.setCursor(10, 20);
+    tft.setTextColor(RED);          
     tft.print(F("RED:"));
     // Label for Blue Channel
-    tft.setCursor(10, 70);          
+    tft.setCursor(10, 70);
+    tft.setTextColor(ST77XX_GREEN);           
     tft.print(F("GREEN:"));
     // Label for Blue Channel
-    tft.setCursor(10, 120);         
+    tft.setCursor(10, 120);
+    tft.setTextColor(CYAN);          
     tft.print(F("BLUE:"));
   delay(500);
 }

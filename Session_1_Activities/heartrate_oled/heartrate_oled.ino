@@ -38,7 +38,7 @@ Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
 MAX30105 particleSensor;
 
 // --- Heart Rate Variables ---
-const byte RATE_SIZE = 6; // Number of readings to average. Increase for more averaging.
+const byte RATE_SIZE = 4; // Number of readings to average. Increase for more averaging.
 byte rates[RATE_SIZE];    // Array of heart rates readings
 byte rateSpot = 0;        // Index for the rates array
 long lastBeat = 0;        // Time (millis()) of the last detected beat
