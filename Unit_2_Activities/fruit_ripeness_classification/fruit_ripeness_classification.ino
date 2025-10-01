@@ -161,10 +161,13 @@ void loop() {
       for (uint16_t i = 0; i < EI_CLASSIFIER_LABEL_COUNT; i++) {
         float conf = result.classification[i].value;
         // We only consider a label if the confidence is greater than 60%.
-        if (conf > 0.6) {
+        if (conf > 0.8) {
           newLabel = String(result.classification[i].label);
           highestProbability = conf;
           break;
+        }
+        else {
+          newLabel = "No Fruit";
         }
       }
 
