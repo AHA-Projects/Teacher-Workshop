@@ -1,3 +1,5 @@
+#include <Water_Leak_Detection_inferencing.h>
+
 
 
 // Acknowledgments
@@ -13,7 +15,6 @@
 // It uses a light sensor to analyze the color of a surface and an OLED screen to display if a leak is detected.
 
 // Importing the Edge Impulse library, which contains the pre-trained model for water leak detection.
-#include <Water_Leak_Detection_Template_inferencing.h>
 
 // Importing the library for the APDS9960 sensor, a versatile sensor that can detect ambient light and color.
 #include "Adafruit_APDS9960.h"

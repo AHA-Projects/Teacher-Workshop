@@ -14,7 +14,8 @@
 
 // Importing Edge Impulse Library
 // This library contains the pre-trained machine learning model for fruit ripeness classification.
-#include <Fruit_Ripeness_Classfication_inferencing.h>
+// #include <Fruit_Ripeness_Classfication_inferencing.h>
+#include <Fruit_Ripeness-v2_inferencing.h>
 
 // Importing Sensor specific library
 // This library allows us to communicate with the APDS9960 sensor, which can detect color.
@@ -161,7 +162,7 @@ void loop() {
       for (uint16_t i = 0; i < EI_CLASSIFIER_LABEL_COUNT; i++) {
         float conf = result.classification[i].value;
         // We only consider a label if the confidence is greater than 60%.
-        if (conf > 0.8) {
+        if (conf > 0.7) {
           newLabel = String(result.classification[i].label);
           highestProbability = conf;
           break;
