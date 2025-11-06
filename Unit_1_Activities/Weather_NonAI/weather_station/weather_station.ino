@@ -104,6 +104,7 @@ void setup() {
 void loop() { 
     // --- Read Sensor Values ---
     float temperature = bme.readTemperature();      // Get temperature in Celsius
+    float temperature = (temperatureC * 9.0 / 5.0) + 32.0;  // Convert to Fahrenheit
     float humidity = bme.readHumidity();            // Get humidity in %
     float pressure = bme.readPressure() / 100.0F;   // Get pressure in hPa
     float altitude = bme.readAltitude(SEALEVELPRESSURE_HPA); // Get altitude in meters
@@ -111,7 +112,7 @@ void loop() {
     // --- Print All Values to Serial Monitor for debugging ---
     Serial.print(F("Temperature = "));
     Serial.print(temperature);
-    Serial.println(F(" °C"));
+    Serial.println(F(" °F"));
 
     Serial.print(F("Pressure = "));
     Serial.print(pressure);
@@ -135,7 +136,7 @@ void loop() {
     tft.setCursor(130, 25);               // Set cursor position for the value (right of "TEMP:")
     tft.print(temperature, 1);            // Print temperature with 1 decimal place
     tft.write(247);                       // This prints the degree symbol: °
-    tft.print(F("C"));                    // Print "C" for Celsius
+    tft.print(F("F"));                    // Print "C" for Celsius
 
     // --- Display Humidity on TFT ---
     // Define area to clear for the humidity value
