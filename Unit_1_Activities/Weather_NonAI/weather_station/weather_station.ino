@@ -103,7 +103,7 @@ void setup() {
 
 void loop() { 
     // --- Read Sensor Values ---
-    float temperature = (bme.readTemperature() * 9.0 / 5.0) + 32.0;  // Convert to Fahrenheit
+    float temperature = bme.readTemperature() * 1.8 + 32;  // Convert to Fahrenheit
     float humidity = bme.readHumidity();            // Get humidity in %
     float pressure = bme.readPressure() / 100.0F;   // Get pressure in hPa
     float altitude = bme.readAltitude(SEALEVELPRESSURE_HPA); // Get altitude in meters
